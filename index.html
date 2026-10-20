@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Corsi Block-Tapping Test</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<header>
+<div class="eyebrow"><span>Experiment / Visual Feedback</span><div class="logo"><svg viewBox="0 0 64 48" aria-hidden="true"><g><rect x="3" y="4" width="12" height="9" rx="1"/><rect x="26" y="1" width="12" height="9" rx="1"/><rect x="50" y="6" width="12" height="9" rx="1"/><rect x="8" y="20" width="12" height="9" rx="1"/><rect x="38" y="19" width="12" height="9" rx="1"/><rect x="2" y="36" width="12" height="9" rx="1"/><rect x="28" y="38" width="12" height="9" rx="1"/><rect x="51" y="34" width="12" height="9" rx="1"/></g><rect x="27" y="19" width="12" height="9" rx="1"/></svg></div></div>
+<div class="ttl"><h1>Corsi<br>Block-Tapping<em>.</em></h1><div class="sub">เปรียบเทียบ Instant กับ Animated Visual Feedback</div></div>
+</header>
+
+<section id="setup" class="card">
+<h2>ตั้งค่าการทดสอบ</h2>
+<label class="f" for="pid">รหัสนักศึกษา (11 หลัก)</label>
+<input type="text" id="pid" inputmode="numeric" maxlength="11" placeholder="67123456789" autocomplete="off">
+<div id="pidMsg">กรอกตัวเลข 11 หลัก</div>
+<label class="f" style="margin-top:8px">ลำดับเงื่อนไข</label>
+<div class="seg">
+<label><input type="radio" name="ord" value="ia" checked><b>กลุ่ม 1</b><span>Instant ก่อน แล้ว Animated</span></label>
+<label><input type="radio" name="ord" value="ai"><b>กลุ่ม 2</b><span>Animated ก่อน แล้ว Instant</span></label>
+</div>
+<label class="chk"><input type="checkbox" id="prac" checked> มีรอบฝึกซ้อมก่อนแต่ละเงื่อนไข (ไม่บันทึกผล)</label>
+<div class="rules">แต่ละเงื่อนไขทำ Forward พัก 1 นาที แล้ว Backward จากนั้นพัก 5 นาทีก่อนเงื่อนไขถัดไป ลำดับยาว 3–9 บล็อก (7 เลเวล) เลเวลละ 2 ชุด ทำครบทุกเลเวลโดยไม่หยุดกลางคัน</div>
+<button class="b" id="go" disabled>เริ่มการทดสอบ</button>
+<div id="bk" class="hidden" style="margin-top:40px"><h2>ข้อมูลสำรองในเครื่องนี้</h2><div class="mute">บันทึกอัตโนมัติทุกชุด ใช้กู้ข้อมูลถ้าหน้าเว็บปิดหรือรีเฟรชกลางคัน</div><div id="bkList"></div></div>
+</section>
+
+<section id="gate" class="card hidden">
+<h2 id="gT"></h2><p id="gD"></p>
+<div id="gC"></div>
+<button class="b" id="gB">เริ่ม</button>
+</section>
+
+<section id="test" class="hidden">
+<div class="card" style="margin-top:14px">
+<div id="head" style="font-weight:600"></div>
+<div class="stats">
+<div class="stat"><b id="okN">0</b><span>ถูก</span></div>
+<div class="stat"><b id="badN">0</b><span>ผิด</span></div>
+<div class="stat"><b id="tTrial">0.00</b><span>เวลาตอบ (วินาที)</span></div>
+<div class="stat"><b id="tStage">0:00</b><span>เวลารวมชุดนี้</span></div>
+</div>
+<div class="need" id="need"></div>
+<div class="board lock" id="board"><div id="fb"></div></div>
+<div id="status"></div>
+</div>
+</section>
+
+<section id="res" class="card hidden">
+<h2>ผลการทดสอบ</h2><div class="mute" id="who" style="margin-bottom:10px"></div>
+<div class="scroll"><table id="sum"></table></div>
+<div class="mute" style="margin-top:8px">Span (ต่อเนื่อง) = เลเวลสูงสุดที่ถูกอย่างน้อย 1 ใน 2 ชุด โดยทุกเลเวลก่อนหน้าก็ถูกอย่างน้อย 1 ชุด / Corsi Score = Span (ต่อเนื่อง) × จำนวนชุดที่ถูก / ⚠ = มีการสลับแท็บระหว่างชุดนั้น</div>
+<h2 style="margin-top:32px">ข้อมูลรายชุด</h2>
+<div class="scroll"><table id="raw"></table></div>
+<button class="b" id="csv">ดาวน์โหลด CSV</button>
+</section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
